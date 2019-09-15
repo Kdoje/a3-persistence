@@ -1,74 +1,47 @@
-Assignment 3 - Persistence: Two-tier Web Application with Flat File Database, Express server, and CSS template
-===
+## Grocery List Online
 
-Due: September 16th, by 11:59 AM.
+http://a3-kdoje.glitch.me (**SEE BOTTOM FOR USER GUIDE**)
 
-This assignnment continues where we left off, extending it to use the most popular Node.js server framework (express), a flat file database suitable for small applications (lowdb), and a CSS application framework / template of your choice (Boostrap, Material Design, Semantic UI, Pure etc.)
+- **The goal of the application**: This application serves as a way to synchronize grocery lists across devices. By registering a list name and password you can add, edit and delete items. You can then log into a separate device and see edits to the list you created. 
 
-
-Baseline Requirements
----
-
-Your application is required to implement the following functionalities:
-
-- a `Server`, created using Express (no alternatives will be accepted for this assignment)
-- a `Results` functionality which shows the entire dataset residing in the server's memory
-- a `Form/Entry` functionality which allows users to add, modify, and delete data items (must be all three!) associated with their user name / account.
-- Use of at least five [Express middleware packages](https://expressjs.com/en/resources/middleware.html). Explore! 
-- Basic authentication using the [Passport middleware](http://www.passportjs.org) for Express (this counts as one of your five middleware packages). We encourage using the Local strategy, but OAuth (Open Authentication) can also be used for additional technical achievement. The course staff cannot help you with the various flavors of OAuth strategies. YOU MUST PROVIDE US WITH ACCOUNT CREDENTIALS TO LOGIN TO YOUR APPLICATION IF YOU USE OAUTH. The course staff cannot be expected to have credentials for any particular OAuth service.
-- Persistent data storage in between server sessions. [lowdb](https://github.com/typicode/lowdb) is a suitable database package for this assignment and will be discussed in class.
-- Use of a [CSS framework or template](https://github.com/troxler/awesome-css-frameworks). This should do the bulk of your styling/CSS for you and be appropriate to your application. For example, don't use [NES.css](https://nostalgic-css.github.io/NES.css/) (which is awesome!) unless you're creating a game or some type of retro 80s site.
-
-Your application is required to demonstrate the use of the following concepts:
-
-HTML:
-- HTML input tags and form fields of various flavors (`<textarea>`, `<input>`, checkboxes, radio buttons etc.)
-- HTML that can display all data *for a particular authenticated user*. Note that this is different from the last assignnment, which required the display of all data in memory on the server.
-
-Note that it might make sense to have two simple pages for this assignment, one that handles login / authentication, and one that contains the rest of your application. For this assignment, it is acceptable to simply create new user accounts upon login if none exist, however, you must alert your users to this fact. If you're not using OAuth 
-
-CSS:
-- CSS styling should primarily be provided by your chosen template/framework. Oftentimes a great deal of care has been put into designing CSS templates; don't override their stylesheets unless you are extremely confident in your graphic design capabilities. The idea is to use CSS templates that give you a professional looking design aesthetic without requiring you to be a graphic designer yourself.
-
-JavaScript:
-- At minimum, a small amount of front-end JavaScript to get / fetch data from the server. See the [previous assignment](https://github.com/cs4241-19a/a2-shortstack) for reference.
-
-Node.js:
-- A server using Express, at least five pieces of Express middleware, and a persistent database (a flat file using lowdb is great).
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements. A good potential starting point is to use the "hello-express" project template inside of Glitch; this appears as an option when you hit the "New Project" button. Use the work you did in the last assignment as a reference to implement functionality, as well as the notes from class on 9/9 and 9/12.
-2. If you developed your project locally, deploy your project to Glitch, and fill in the appropriate fields in your package.json file.
-3. Test your project to make sure that when someone goes to your main page on Glitch, it displays correctly.
-4. Ensure that your project has the proper naming scheme `a3-yourname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. You do not need to include any of your project files in this repo (we will see those on Glitch), you only need to update and commit the README file.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a3-gitname-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your glitch link e.g. http://a3-charlieroberts.glitch.me
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- what authentication strategy / database you chose to use and why (choosing one because it seemed the easiest to implement is perfectly acceptable)
-- what CSS framework you used and why.
-  - include any modifications to the CSS framework you made via custom CSS you authored.
-- the five Express middleware packages you used and a short (one sentence) summary of what each one does.
+- **Challenges**: 
+    - The first challenge was to determine how to associate items with their respective lists.
+    - The second challenge was to ensure that two users with the same usernames (or listnames) can't be created. 
+    - The third challenge was updating the dbAccessor to get items based on users.
+    - The next challenge was aligning and optomizing screen usage for the item list
+    - The final challenge was allowing users to edit the items in place.
+- **CSS Framework**:
+    - I used the materialize framework because it provides a smooth experience on mobile and desktop.
+- **CSS modifications**:
+    - I created three customizations to change the color of the input underline, and the hover effect on the icons on the card.
+- **Authentication strategy and database**:
+    - I chose to use the local strategy with a SQLite database. Because users will create multiple lists, the local strategy allows a single person to manage multiple lists. I used SQLite for its ability to easily store large data sets.
+- **Express middlewares**:
+    1. passport: the authentication middleware
+    2. bodyParser: automatically parses the request body to json for application/json request type
+    3. static: provides static content automatically (from the public folder in my case)
+    4. favicon: provides the icon for the webpage automatically
+    5. morgan: automatically logs request information so I can see what browsers my users prefer the most.
 
 ## Technical Achievements
-- **Tech Achievement 1**: I used OAuth authentication via the GitHub strategy
-- **Tech Achievement 2**: I used over ten Express middleware packages, enabling me to create a server that...
+- **SQLite database for users and list items**: I expanded the existing dbAccessor to work with two tables and pull the data into ram when used to decrease access time.
+- **Asynchronous unit tests for dbAcessor**: I expanded the unit tests to include users and ensure that items would be returned based on username properly. These test the interaction of the user list and item list
+- **Modular Authorization**: I perform the authorization in a separate file from the server so I can expand the functionality without affecting other middlewares.
+- **Access and response optimization**: On start up all pull all elements from the database into list objects to speed up access. I also perform client side checks to ensure no bad requests are sent, to further reduce database read/write time.
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I tested my application using screen reading software, and found that...
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Mobile access**: I tested my application on a mobile platform and was able to use all features of the application
+- **Item cards**: I used the materialize card to create my list items on the UI. I also included dynamically generated form items within the card to allow the user to edit their list.
+- **Slide out login**: I used a slide out sidenav to allow users to login and preview the list.
+- **Unobtrusive error messages**: I used materialize toasts to tell the user when an operation didn't complete successfully.
+---
+### User guide
+- First create an account 
+    - click the person icon on the bottom right
+    - Then enter a name and password and click create
+- Create an item by filling in the item and quantity field, then pressing submit.
+- To modify an item:
+    - click the trashcan to delete the item
+    - click the checkbox to mark it as purchased
+    - change the name on the first text field and press enter to submit the change
+    - press the plus or minus button to increase/decrease the quantity, or enter a number manually.
