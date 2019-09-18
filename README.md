@@ -1,6 +1,6 @@
 ## Grocery List Online
 
-http://a3-kdoje.glitch.me (**SEE BOTTOM FOR USER GUIDE**)
+http://a3-kdoje.glitch.me (**SEE BOTTOM FOR USER GUIDE AND IMPORTANT NOTE**)
 
 - **The goal of the application**: This application serves as a way to synchronize grocery lists across devices. By registering a list name and password you can add, edit and delete items. You can then log into a separate device and see edits to the list you created. 
 
@@ -36,6 +36,7 @@ http://a3-kdoje.glitch.me (**SEE BOTTOM FOR USER GUIDE**)
 - **Unobtrusive error messages**: I used materialize toasts to tell the user when an operation didn't complete successfully.
 ---
 ### User guide
+-*IMPORTANT* Make sure the database is intialized before connecting to the server.` The log will print initial dao list length is` When it's intialized and ready for you to connect to.
 - First create an account 
     - click the person icon on the bottom right
     - Then enter a name and password and click create
