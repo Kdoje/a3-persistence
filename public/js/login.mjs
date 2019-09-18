@@ -24,6 +24,7 @@ const createList = function (e) {
                 M.toast({html: 'account already exists'});
                 return false;
             }
+            M.toast({html: 'Account created'});
             populateList();
         })
 };
@@ -51,6 +52,7 @@ const login = function (e){
             if(response){
                 console.log('repopulating on login');
                 populateList();
+                M.toast({html: 'logged in'});
             } else{
                 console.log('not doing that');
             }

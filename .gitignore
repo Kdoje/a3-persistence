@@ -4,3 +4,4 @@ package-lock.json
 .data/
 .idea
 dist-copy/*
+access.log
